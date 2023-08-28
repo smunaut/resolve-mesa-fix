@@ -1,0 +1,22 @@
+Inject `GL_ARB_texture_border_clamp` in the extension list.
+
+Davinci Resolve wants that extension but unfortunately mesa before
+23.3 doesn't publish that extension for Core profiles. It is supported
+but because in Core profiles this is not optional, it wasn't in the
+extension list.
+
+This intercepts some GL calls to forcibly inject it.
+
+
+To build:
+
+```
+make
+```
+
+
+To run:
+
+```
+LD_PRELOAD=./resolve_mesa_fix.so /path/to/resolve/bin/resolve
+```
